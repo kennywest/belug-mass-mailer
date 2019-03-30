@@ -8,6 +8,7 @@ public class ContactParser {
     public static Contact parse(List<Object> row) {
         return new Contact(Objects.toString(row.get(1)),
                 Objects.toString(row.get(2)),
-                Objects.toString(row.get(3)));
+                Objects.toString(row.get(3)),
+                Objects.toString(row.get(4)));
     }
 }

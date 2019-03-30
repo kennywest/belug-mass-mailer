@@ -35,7 +35,7 @@ public class Mailer {
         ));
         MailTemplate mailTemplate = new MailTemplate(
                 new Sender(),
-                new Receiver("Kenneth Westelinck", "kenneth.westelinck@telenet.be"),
+                new Receiver("Kenneth Westelinck", "kenneth.westelinck@gmail.com"),
                 data);
 
         ObjectMapper mapper = new ObjectMapper();
