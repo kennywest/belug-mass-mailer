@@ -3,3 +3,4 @@ mass-mailer.iml
 target
 /src/main/resources/credentials.json
 /tokens/StoredCredential
+**/ApiKey.java
