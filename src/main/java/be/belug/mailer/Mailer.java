@@ -27,11 +27,11 @@ public class Mailer {
                 new Detail("elektriek", "VERGEET GEEN priseblockskes")
         ));
         data.put("broodjes", asList(
-                new Broodje("Zaterdag", 1, "pitta"),
-                new Broodje("Zondag", 1, "martino")
+                new Broodje("Zaterdag", 1, "pitta", 0),
+                new Broodje("Zondag", 1, "martino", 0   )
         ));
         data.put("diners", asList(
-                new Diner(1, "spaghetti")
+                new Diner(1, "spaghetti", 25)
         ));
         MailTemplate mailTemplate = new MailTemplate(
                 new Sender(),

@@ -1,5 +1,6 @@
 package be.belug.mailer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Broodje {
@@ -13,9 +14,27 @@ public class Broodje {
     @JsonProperty("type")
     private final String type;
 
-    public Broodje(String dag, int aantal, String type) {
+    private final double prijs;
+
+    public Broodje(String dag, int aantal, String type, double prijs) {
         this.dag = dag;
         this.aantal = aantal;
         this.type = type;
+        this.prijs = prijs;
+    }
+
+    @JsonIgnore
+    public double getPrijs() {
+        return this.prijs;
+    }
+
+    @Override
+    public String toString() {
+        return "Broodje{" +
+                "dag='" + dag + '\'' +
+                ", aantal=" + aantal +
+                ", type='" + type + '\'' +
+                ", prijs=" + prijs +
+                '}';
     }
 }

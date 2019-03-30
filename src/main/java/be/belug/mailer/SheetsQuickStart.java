@@ -20,6 +20,9 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class SheetsQuickStart {
     private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
@@ -71,9 +74,20 @@ public class SheetsQuickStart {
             System.out.println("No data found.");
         } else {
             int i = 0;
-            for (List row : values) {
-                // Print columns A and E, which correspond to indices 0 and 4.
-                System.out.printf("%s, %s, %s, %s\n", i++, row.get(1), row.get(2), row.get(3));
+            for (List<Object> row : values) {
+                if (isNotBlank(Objects.toString(row.get(0)))) {
+                    // Print columns A and E, which correspond to indices 0 and 4.
+                    System.out.println("WIE: " + ContactParser.parse(row));
+                    System.out.println("WAT: " + DetailParser.parse(row));
+                    List<Broodje> broodjes = BroodjesParser.parse(row);
+                    System.out.println("BROODJES: " + broodjes);
+                    List<Diner> diners = DinerParser.parse(row);
+                    System.out.println("AVONDETEN: " + diners);
+
+                    System.out.println("TE BETALEN: " + PriceCalculator.calculatePrice(broodjes, diners));
+
+                    System.out.println("====================================");
+                }
             }
         }
     }
