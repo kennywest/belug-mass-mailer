@@ -5,9 +5,9 @@ public class Contact {
     public final String voornaam;
     public final String naam;
     public final String email;
-    public final String language;
+    public final Language language;
 
-    public Contact(String voornaam, String naam, String email, String language) {
+    public Contact(String voornaam, String naam, String email, Language language) {
         this.voornaam = voornaam;
         this.naam = naam;
         this.email = email;
@@ -19,11 +19,11 @@ public class Contact {
     }
 
     public boolean isDutch() {
-        return "NL".equals(language);
+        return language.isDutch();
     }
 
     public boolean isFrench() {
-        return "FR".equals(language);
+        return language.isFrench();
     }
 
     @Override

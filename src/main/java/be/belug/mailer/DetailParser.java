@@ -9,7 +9,26 @@ import static com.google.api.client.util.Lists.newArrayList;
 
 public class DetailParser {
 
+    public static final String VERKOOP_NL = "Verkoop: ";
+    public static final String VERKOOP_FR = "Vente: ";
+    public static final String STROOM_NL = "Stroom";
+    public static final String STROOM_FR = "Courant";
+    public static final String VRIJWILLIGER_NL = "Vrijwilliger";
+    public static final String VRIJWILLIGER_FR = "Bénévole";
+    public static final String VERKOOP_DESCR_NL = "Vergeet je afrokdoeken niet";
+    public static final String VERKOOP_DESCR_FR = "N'oubliez pas vos nappes";
+    public static final String EXPOSITIERUIMTE_NL = "expositieruimte";
+    public static final String EXPOSITIERUIMTE_FR = "espace d'exposition";
+    public static final String EXPO_DESCR_NL = VERKOOP_DESCR_NL;
+    public static final String EXPO_DESCR_FR = VERKOOP_DESCR_FR;
+    public static final String STROOM_DESCR_NL = "Vergeet je verlengkabel niet";
+    public static final String STROOM_DESCR_FR = "N'oubliez pas vos allonges";
+    public static final String VRIJWILLIGER_DESCR_NL = "Je krijgt een taakverdeling bij aanvang beurs";
+    public static final String VRIJWILLIGER_DESCR_FR = "Une tâche vous sera attribuée en début d'expo";
+
     public static List<Detail> parse(List<Object> row) {
+        Language language = LanguageParser.parse(row);
+
         List<Detail> details = newArrayList();
 
         boolean seller = parseInt(row.get(6)) > 0;
@@ -22,19 +41,19 @@ public class DetailParser {
         double exSurfaceInCm2 = parseDouble(row.get(15));
 
         if (seller) {
-            details.add(new Detail("Verkoop: " + sellLengthInM + "m", "Vergeet je afrokdoeken niet"));
+            details.add(new Detail(language.translated(VERKOOP_NL, VERKOOP_FR) + sellLengthInM + "m", language.translated(VERKOOP_DESCR_NL, VERKOOP_DESCR_FR)));
         }
 
         if (exhibitor) {
-            details.add(new Detail(exLengthInCm + "cm x" + exWidthInCm + "cm (" + exSurfaceInCm2 + "m2) expositieruimte", "Vergeet je afrokdoeken niet"));
+            details.add(new Detail(exLengthInCm + "cm x " + exWidthInCm + "cm (" + exSurfaceInCm2 + "m2) " + language.translated(EXPOSITIERUIMTE_NL, EXPOSITIERUIMTE_FR), language.translated(EXPO_DESCR_NL, EXPO_DESCR_FR)));
         }
 
         if (elek) {
-            details.add(new Detail("Stroom", "Vergeet je verlengkabel niet"));
+            details.add(new Detail(language.translated(STROOM_NL, STROOM_FR), language.translated(STROOM_DESCR_NL, STROOM_DESCR_FR)));
         }
 
         if (volunteer) {
-            details.add(new Detail("Vrijwilliger", "Je krijgt een taakverdeling bij aanvang beurs"));
+            details.add(new Detail(language.translated(VRIJWILLIGER_NL, VRIJWILLIGER_FR), language.translated(VRIJWILLIGER_DESCR_NL, VRIJWILLIGER_DESCR_FR)));
         }
         return details;
     }
