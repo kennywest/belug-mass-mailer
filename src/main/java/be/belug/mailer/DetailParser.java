@@ -9,22 +9,22 @@ import static com.google.api.client.util.Lists.newArrayList;
 
 public class DetailParser {
 
-    public static final String VERKOOP_NL = "Verkoop: ";
-    public static final String VERKOOP_FR = "Vente: ";
-    public static final String STROOM_NL = "Stroom";
-    public static final String STROOM_FR = "Courant";
-    public static final String VRIJWILLIGER_NL = "Vrijwilliger";
-    public static final String VRIJWILLIGER_FR = "Bénévole";
-    public static final String VERKOOP_DESCR_NL = "Vergeet je afrokdoeken niet";
-    public static final String VERKOOP_DESCR_FR = "N'oubliez pas vos nappes";
-    public static final String EXPOSITIERUIMTE_NL = "expositieruimte";
-    public static final String EXPOSITIERUIMTE_FR = "espace d'exposition";
-    public static final String EXPO_DESCR_NL = VERKOOP_DESCR_NL;
-    public static final String EXPO_DESCR_FR = VERKOOP_DESCR_FR;
-    public static final String STROOM_DESCR_NL = "Vergeet je verlengkabel niet";
-    public static final String STROOM_DESCR_FR = "N'oubliez pas vos allonges";
-    public static final String VRIJWILLIGER_DESCR_NL = "Je krijgt een taakverdeling bij aanvang beurs";
-    public static final String VRIJWILLIGER_DESCR_FR = "Une tâche vous sera attribuée en début d'expo";
+    private static final String VERKOOP_NL = "Verkoop: ";
+    private static final String VERKOOP_FR = "Vente: ";
+    private static final String STROOM_NL = "Stroom";
+    private static final String STROOM_FR = "Courant";
+    private static final String VRIJWILLIGER_NL = "Vrijwilliger";
+    private static final String VRIJWILLIGER_FR = "Bénévole";
+    private static final String VERKOOP_DESCR_NL = "Vergeet je afrokdoeken niet";
+    private static final String VERKOOP_DESCR_FR = "N'oubliez pas vos nappes";
+    private static final String EXPOSITIERUIMTE_NL = "expositieruimte";
+    private static final String EXPOSITIERUIMTE_FR = "espace d'exposition";
+    private static final String EXPO_DESCR_NL = VERKOOP_DESCR_NL;
+    private static final String EXPO_DESCR_FR = VERKOOP_DESCR_FR;
+    private static final String STROOM_DESCR_NL = "Vergeet je verlengkabel niet";
+    private static final String STROOM_DESCR_FR = "N'oubliez pas vos allonges";
+    private static final String VRIJWILLIGER_DESCR_NL = "Je krijgt een taakverdeling bij aanvang beurs";
+    private static final String VRIJWILLIGER_DESCR_FR = "Une tâche vous sera attribuée en début d'expo";
 
     public static List<Detail> parse(List<Object> row) {
         Language language = LanguageParser.parse(row);
