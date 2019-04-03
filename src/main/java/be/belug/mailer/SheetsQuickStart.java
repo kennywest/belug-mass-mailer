@@ -17,11 +17,11 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static be.belug.mailer.Utils.parseInt;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class SheetsQuickStart {
@@ -58,7 +58,7 @@ public class SheetsQuickStart {
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
-    public static void main(String... args) throws IOException, GeneralSecurityException {
+    public static void main(String... args) throws Exception, Exception {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1iV9MDX-yjHsQi8rUyVzMWVIMnY5PKiOvc-FDa2HSU_4";
@@ -75,13 +75,19 @@ public class SheetsQuickStart {
         } else {
             int i = 0;
             for (List<Object> row : values) {
-                if (isNotBlank(Objects.toString(row.get(0)))) {
+                if (isNotBlank(Objects.toString(row.get(0))) && parseInt(row.get(10)) == 56 /* && parseInt(row.get(0)) == 455 */) {
                     // Print columns A and E, which correspond to indices 0 and 4.
-                    System.out.println("WIE: " + ContactParser.parse(row));
-                    System.out.println("WAT: " + DetailParser.parse(row));
+                    Contact contact = ContactParser.parse(row);
+                    List<Detail> details = DetailParser.parse(row);
                     List<Broodje> broodjes = BroodjesParser.parse(row);
-                    System.out.println("BROODJES: " + broodjes);
                     List<Diner> diners = DinerParser.parse(row);
+                    Pariticipants pariticipants = PariticipantsParser.parse(row);
+
+                    Mailer.sendMail(contact, pariticipants, broodjes, diners, details);
+
+                    System.out.println("WIE: " + contact);
+                    System.out.println("WAT: " + details);
+                    System.out.println("BROODJES: " + broodjes);
                     System.out.println("AVONDETEN: " + diners);
 
                     System.out.println("TE BETALEN: " + PriceCalculator.calculatePrice(broodjes, diners));
