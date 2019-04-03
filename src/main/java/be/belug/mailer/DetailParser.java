@@ -48,7 +48,7 @@ public class DetailParser {
 
         if (exhibitor && (exLengthInCm + exLengthInCm + exSurfaceInCm2) > 0) {
             details.add(new Detail(exLengthInCm + "cm x " + exWidthInCm + "cm (" + exSurfaceInCm2 + "m2) " + language.translated(EXPOSITIERUIMTE_NL, EXPOSITIERUIMTE_FR), language.translated(EXPO_DESCR_NL, EXPO_DESCR_FR)));
-        } else if (exhibitor && !seller) {
+        } else if (exhibitor && !seller && !volunteer) {
             details.add(new Detail("", language.translated(GEEN_RUIMTE_NL, GEEN_RUIMTE_FR)));
         }
 
