@@ -25,6 +25,8 @@ public class DetailParser {
     private static final String STROOM_DESCR_FR = "N'oubliez pas vos allonges";
     private static final String VRIJWILLIGER_DESCR_NL = "Je krijgt een taakverdeling bij aanvang beurs";
     private static final String VRIJWILLIGER_DESCR_FR = "Une tâche vous sera attribuée en début d'expo";
+    private static final String GEEN_RUIMTE_NL = "Geen ruimte aangevraagd";
+    private static final String GEEN_RUIMTE_FR = "Pas d'espace demandé";
 
     public static List<Detail> parse(List<Object> row) {
         Language language = LanguageParser.parse(row);
@@ -44,8 +46,10 @@ public class DetailParser {
             details.add(new Detail(language.translated(VERKOOP_NL, VERKOOP_FR) + sellLengthInM + "m", language.translated(VERKOOP_DESCR_NL, VERKOOP_DESCR_FR)));
         }
 
-        if (exhibitor) {
+        if (exhibitor && (exLengthInCm + exLengthInCm + exSurfaceInCm2) > 0) {
             details.add(new Detail(exLengthInCm + "cm x " + exWidthInCm + "cm (" + exSurfaceInCm2 + "m2) " + language.translated(EXPOSITIERUIMTE_NL, EXPOSITIERUIMTE_FR), language.translated(EXPO_DESCR_NL, EXPO_DESCR_FR)));
+        } else if (exhibitor && !seller) {
+            details.add(new Detail("", language.translated(GEEN_RUIMTE_NL, GEEN_RUIMTE_FR)));
         }
 
         if (elek) {

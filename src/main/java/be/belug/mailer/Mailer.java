@@ -23,19 +23,20 @@ public class Mailer {
         data.put("participants", 1);
         data.put("totaalbedrag", 1000);
         data.put("details", asList(
-                new Detail("1m x 2m expositieruimte", "VERGEET JE AFROKDOEKEN NIET"),
-                new Detail("elektriek", "VERGEET GEEN priseblockskes")
+                //new Detail("1m x 2m expositieruimte", "VERGEET JE AFROKDOEKEN NIET"),
+                new Detail("Geen ruimte gereserveerd", "")
         ));
         data.put("broodjes", asList(
                 new Broodje("Zaterdag", 1, "pitta", 0),
-                new Broodje("Zondag", 1, "martino", 0   )
+                new Broodje("Zondag", 1, "martino", 0)
         ));
         data.put("diners", asList(
-                new Diner(1, "spaghetti", 25)
+                new Diner(2, "spaghetti", 25)
         ));
         MailTemplate mailTemplate = new MailTemplate(
                 new Sender(),
                 new Receiver("Kenneth Westelinck", "kenneth.westelinck@gmail.com"),
+                2,
                 data);
 
         ObjectMapper mapper = new ObjectMapper();

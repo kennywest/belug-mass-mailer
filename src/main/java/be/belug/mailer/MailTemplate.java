@@ -19,7 +19,7 @@ public class MailTemplate {
     private final List<Receiver> to;
 
     @JsonProperty("templateId")
-    private final int templateId = 1;
+    private final int templateId;
 
     @JsonProperty("tags")
     private final List<String> tags = singletonList("bevestigingsmail");
@@ -27,10 +27,11 @@ public class MailTemplate {
     @JsonProperty("params")
     private final HashMap<String, Object> params;
 
-    public MailTemplate(Sender sender, Receiver receiver, HashMap<String, Object> params) {
+    public MailTemplate(Sender sender, Receiver receiver, int templateId, HashMap<String, Object> params) {
         this.sender = sender;
         this.replyTo = sender;
         this.to = singletonList(receiver);
         this.params = params;
+        this.templateId = templateId;
     }
 }
