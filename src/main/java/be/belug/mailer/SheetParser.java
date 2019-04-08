@@ -21,10 +21,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static be.belug.mailer.Utils.parseInt;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class SheetsQuickStart {
+public class SheetParser {
     private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
@@ -45,7 +44,7 @@ public class SheetsQuickStart {
      */
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
-        InputStream in = SheetsQuickStart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = SheetParser.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
         // Build flow and trigger user authorization request.
@@ -75,7 +74,9 @@ public class SheetsQuickStart {
         } else {
             int i = 0;
             for (List<Object> row : values) {
-                if (isNotBlank(Objects.toString(row.get(0))) && parseInt(row.get(10)) == 56 /* && parseInt(row.get(0)) == 455 */) {
+                i++;
+                if (isNotBlank(Objects.toString(row.get(0))) && i >= 125 && i < 126 /*&& parseInt(row.get(10)) == 56 /* && parseInt(row.get(0)) == 455 */) {
+                    //if (isNotBlank(Objects.toString(row.get(0))) && LanguageParser.parse(row).isFrench() /*&& parseInt(row.get(10)) == 56 /* && parseInt(row.get(0)) == 455 */) {
                     // Print columns A and E, which correspond to indices 0 and 4.
                     Contact contact = ContactParser.parse(row);
                     List<Detail> details = DetailParser.parse(row);
@@ -85,6 +86,7 @@ public class SheetsQuickStart {
 
                     Mailer.sendMail(contact, pariticipants, broodjes, diners, details);
 
+                    System.out.println("I: " + i);
                     System.out.println("WIE: " + contact);
                     System.out.println("WAT: " + details);
                     System.out.println("BROODJES: " + broodjes);
